@@ -16,14 +16,19 @@ router.get('/', async (req, res) => {
 });
 
 
+
 // GET /api/products/:id - Get a specific product
 router.get('/:id', async (req, res) => {
-    const product = await Product.findOne({ id: req.params.id });
-    res.json(product);
-    if (!product) {
-        res.status(404).json({ message: 'Product not found!' });
+    try {
+        const product = await Product.findOne({ id: req.params.id });
+        if (!product) 
+            return res.status(404).json({ message: 'Product not found!' });
+        res.json(product);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 });
+
 
 // GET /api/products?category=Electronics(filtering by category)
 router.get('/', async (req, res, next) => {
