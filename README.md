@@ -1,62 +1,165 @@
-# Express.js RESTful API Assignment
+# Express.js RESTful API for Product Management
 
-This assignment focuses on building a RESTful API using Express.js, implementing proper routing, middleware, and error handling.
+A RESTful API built with Express.js that provides CRUD operations for managing products, including advanced features like filtering, pagination, and search.
 
-## Assignment Overview
-
-You will:
-1. Set up an Express.js server
-2. Create RESTful API routes for a product resource
-3. Implement custom middleware for logging, authentication, and validation
-4. Add comprehensive error handling
-5. Develop advanced features like filtering, pagination, and search
-
-## Getting Started
-
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Install dependencies:
-   ```
-   npm install
-   ```
-4. Run the server:
-   ```
-   npm start
-   ```
-
-## Files Included
-
-- `Week2-Assignment.md`: Detailed assignment instructions
-- `server.js`: Starter Express.js server file
-- `.env.example`: Example environment variables file
-
-## Requirements
+## Prerequisites
 
 - Node.js (v18 or higher)
-- npm or yarn
-- Postman, Insomnia, or curl for API testing
+- MongoDB installed and running locally
+- npm or yarn package manager
 
-## API Endpoints
+## Installation
 
-The API will have the following endpoints:
+1. Clone the repository:
+```bash
+git clone <repository-url>
+```
 
-- `GET /api/products`: Get all products
-- `GET /api/products/:id`: Get a specific product
-- `POST /api/products`: Create a new product
-- `PUT /api/products/:id`: Update a product
-- `DELETE /api/products/:id`: Delete a product
+2. Install dependencies:
+```bash
+npm install
+```
 
-## Submission
+3. Create a .env file in the root directory with the following variables:
+```env
+PORT=3000
+MONGO_URI=mongodb://localhost:27017/mern3
+```
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+4. Start the server:
+```bash
+npm start
+```
 
-1. Complete all the required API endpoints
-2. Implement the middleware and error handling
-3. Document your API in the README.md
-4. Include examples of requests and responses
+The server will run on `http://localhost:3000`
 
-## Resources
+## API Documentation
 
-- [Express.js Documentation](https://expressjs.com/)
-- [RESTful API Design Best Practices](https://restfulapi.net/)
-- [HTTP Status Codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) 
+### Authentication
+
+Protected routes require an authorization header:
+```
+Authorization: BearerMySecretToken
+```
+
+### Available Endpoints
+
+#### Get All Products
+- **GET** `/api/products`
+- **Query Parameters:**
+  - `category`: Filter by category
+  - `page`: Page number for pagination
+  - `limit`: Number of items per page
+- **Response:**
+```json
+[
+  {
+    "id": "uuid-here",
+    "name": "Product Name",
+    "description": "Product Description",
+    "price": 99.99,
+    "category": "Electronics",
+    "inStock": true
+  }
+]
+```
+
+#### Get Product by ID
+- **GET** `/api/products/:id`
+- **Response:**
+```json
+{
+  "id": "uuid-here",
+  "name": "Product Name",
+  "description": "Product Description",
+  "price": 99.99,
+  "category": "Electronics",
+  "inStock": true
+}
+```
+
+#### Create Product
+- **POST** `/api/products`
+- **Body:**
+```json
+{
+  "name": "New Product",
+  "description": "Product Description",
+  "price": 99.99,
+  "category": "Electronics",
+  "inStock": true
+}
+```
+- **Response:** Created product object with status 201
+
+#### Update Product
+- **PUT** `/api/products/:id`
+- **Body:** Same as POST request
+- **Response:** Updated product object
+
+#### Delete Product
+- **DELETE** `/api/products/:id`
+- **Response:**
+```json
+{
+  "message": "Product deleted successfully!"
+}
+```
+
+### Advanced Features
+
+#### Search Products
+- **GET** `/api/products/search?name=keyword`
+- **Response:** Array of matching products
+
+#### Get Product Statistics
+- **GET** `/api/products/stats`
+- **Response:**
+```json
+[
+  {
+    "_id": "Electronics",
+    "count": 5
+  },
+  {
+    "_id": "Clothing",
+    "count": 3
+  }
+]
+```
+
+## Error Handling
+
+The API returns appropriate HTTP status codes:
+- 200: Success
+- 201: Created
+- 400: Bad Request
+- 401: Unauthorized
+- 404: Not Found
+- 500: Server Error
+
+Error responses include a message:
+```json
+{
+  "message": "Error description"
+}
+```
+
+## Middleware Features
+
+- Request logging
+- Authentication check for protected routes
+- Request body validation
+- Global error handling
+
+## Development
+
+To run the server in development mode with automatic restart:
+```bash
+npm start
+```
+
+For production:
+```bash
+npm run server
+```

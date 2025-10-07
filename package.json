@@ -1,0 +1,32 @@
+{
+  "name": "express-js-server-side-framework-psychokeed",
+  "version": "1.0.0",
+  "description": "This assignment focuses on building a RESTful API using Express.js, implementing proper routing, middleware, and error handling.",
+  "main": "server.js",
+  "scripts": {
+    "server": "node server.js",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/psychokeed/express-js-server-side-framework-psychokeed.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/psychokeed/express-js-server-side-framework-psychokeed/issues"
+  },
+  "homepage": "https://github.com/psychokeed/express-js-server-side-framework-psychokeed#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "epress": "^0.0.1-security",
+    "express": "^5.1.0",
+    "logger": "^0.0.1",
+    "mongodb": "^6.20.0",
+    "mongoose": "^8.19.0",
+    "nodemon": "^3.1.10",
+    "uuid": "^13.0.0"
+  }
+}
